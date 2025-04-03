@@ -43,8 +43,7 @@ void SysTick_Init()
 
 void SysTick_delay_1s()
 {
-    while ((SysTick->CTRL & (1 << 16)) == 0)
-        ; // Wait for COUNTFLAG
+    while ((SysTick->CTRL & (1 << 16)) == 0); // Wait for COUNTFLAG
 }
 
 void SysTick_delay_seconds(uint32_t seconds)
