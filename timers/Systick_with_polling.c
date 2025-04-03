@@ -19,6 +19,8 @@ int main()
     GPIOF->DIR |= LED_RED | LED_BLUE | LED_GREEN;
     GPIOF->DEN |= LED_RED | LED_BLUE | LED_GREEN;
 
+    SysTick_Init();
+
     while (1)
     {
         GPIOF->DATA = LED_RED;
@@ -33,21 +35,22 @@ int main()
 
 void SysTick_Init()
 {
-    SysTick->LOAD = SYSTEM_CLOCK - 1;  // Load for 1 second (16M ticks)
-    SysTick->VAL = 0;                  // Clear current value
-    SysTick->CTRL = (1 << 0) |         // Enable SysTick
-                    (1 << 2);          // Use system clock (16MHz)
+    SysTick->LOAD = SYSTEM_CLOCK - 1; // Load for 1 second (16M ticks)
+    SysTick->VAL = 0;                 // Clear current value
+    SysTick->CTRL = (1 << 0) |        // Enable SysTick
+                    (1 << 2);         // Use system clock (16MHz)
 }
 
 void SysTick_delay_1s()
 {
-    while ((SysTick->CTRL & (1 << 16)) == 0); // Wait for COUNTFLAG
+    while ((SysTick->CTRL & (1 << 16)) == 0)
+        ; // Wait for COUNTFLAG
 }
 
 void SysTick_delay_seconds(uint32_t seconds)
 {
     while (seconds--)
     {
-        SysTick_delay_1s();  // Wait for 1 second each iteration
+        SysTick_delay_1s(); // Wait for 1 second each iteration
     }
 }
