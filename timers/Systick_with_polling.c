@@ -22,11 +22,11 @@ int main()
     while (1)
     {
         GPIOF->DATA = LED_RED;
-        SysTick_delay_s(15);
+        SysTick_delay_seconds(15);
         GPIOF->DATA &= ~LED_RED;
 
         GPIOF->DATA |= LED_GREEN;
-        SysTick_delay_s(15);
+        SysTick_delay_seconds(15);
         GPIOF->DATA &= ~LED_GREEN;
     }
 }
@@ -44,7 +44,7 @@ void SysTick_delay_1s()
     while ((SysTick->CTRL & (1 << 16)) == 0); // Wait for COUNTFLAG
 }
 
-void SysTick_delay_s(uint32_t seconds)
+void SysTick_delay_seconds(uint32_t seconds)
 {
     while (seconds--)
     {
