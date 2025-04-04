@@ -1,6 +1,6 @@
 # Learning from Mistakes
 
-
+Calling `SysTick_delay_seconds(15)` does not actually equal 15 seconds
 
 <table>
 <tr>
